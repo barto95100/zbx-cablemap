@@ -22,10 +22,22 @@ Tested on Zabbix 8.0 (PHP 8.x). Should work on 7.x frontends using module manife
 
 ## Install
 
-1. Copy this folder to `<zabbix-ui>/modules/cablemap` (e.g. `/usr/share/zabbix/ui/modules/cablemap`),
-   or use `./deploy.sh` (see below).
-2. *Administration → General → Modules → Scan directory* → enable **Cablemap**.
-3. Open *Monitoring → Cablemap*.
+All paths below are on the **Zabbix web (frontend) server**, not on your workstation.
+
+1. Find the frontend directory (the one that contains `zabbix.php`):
+   ```bash
+   find / -name zabbix.php -not -path '*/proc/*' 2>/dev/null
+   ```
+   With the Debian/Ubuntu packages it is `/usr/share/zabbix/ui`; other distributions and Docker images can differ.
+   The modules directory is `<frontend>/modules`.
+2. Download the zip from the [releases page](https://github.com/barto95100/zbx-cablemap/releases) and unpack it there:
+   ```bash
+   sudo unzip cablemap-0.7.0.zip -d /usr/share/zabbix/ui/modules/   # creates .../modules/cablemap
+   ```
+   Or clone the repository and copy the folder to `<frontend>/modules/cablemap`, or use `./deploy.sh` from your
+   workstation (see below).
+3. *Administration → General → Modules → Scan directory* → enable **Cablemap**.
+4. Open *Monitoring → Cablemap*.
 
 ## Describe your topology with tags
 
