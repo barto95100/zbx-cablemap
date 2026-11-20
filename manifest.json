@@ -1,0 +1,35 @@
+{
+	"manifest_version": 2.0,
+	"id": "cablemap",
+	"name": "Cablemap",
+	"version": "0.7.0",
+	"namespace": "Cablemap",
+	"author": "barto95100",
+	"description": "Hierarchical cabling/topology map: links from host tags, live port traffic, problems by severity and topology-aware root cause.",
+	"actions": {
+		"cablemap.view": {
+			"class": "CablemapView",
+			"view": "cablemap.view"
+		},
+		"cablemap.data": {
+			"class": "CablemapData",
+			"layout": "layout.json"
+		},
+		"cablemap.host": {
+			"class": "CablemapHost",
+			"layout": "layout.json"
+		},
+		"cablemap.services": {
+			"class": "CablemapServices",
+			"view": "cablemap.services"
+		},
+		"cablemap.servicesdata": {
+			"class": "CablemapServicesData",
+			"layout": "layout.json"
+		},
+		"cablemap.serviceinfo": {
+			"class": "CablemapServiceInfo",
+			"layout": "layout.json"
+		}
+	}
+}

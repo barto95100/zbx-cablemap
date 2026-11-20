@@ -1,0 +1,31 @@
+{
+	"_comment": "Copy to config.json (same folder) to override config.default.json. Only list what you change.",
+	"tags": {
+		"uplink": [
+			"cablemap.uplink"
+		],
+		"parent": [
+			"cablemap.parent"
+		],
+		"root": [
+			"cablemap.root"
+		]
+	},
+	"scope": {
+		"host_groups": [
+			"Network devices",
+			"Servers"
+		],
+		"hide_unlinked": true
+	},
+	"problems": {
+		"min_severity": 2
+	},
+	"display": {
+		"links": "curved",
+		"traffic": true,
+		"animate": true
+	},
+	"refresh_seconds": 15,
+	"labels": {}
+}

@@ -1,0 +1,191 @@
+{
+	"tags": {
+		"uplink": [
+			"cablemap.uplink",
+			"nt:uplink"
+		],
+		"parent": [
+			"cablemap.parent",
+			"nt:parent"
+		],
+		"root": [
+			"cablemap.root",
+			"cm:root"
+		],
+		"speed": [
+			"cablemap.speed"
+		],
+		"graph": [
+			"cablemap.graph"
+		],
+		"swap": [
+			"cablemap.swap"
+		]
+	},
+	"traffic": {
+		"in": [
+			{
+				"key": "net.if.in[ifHCInOctets.{port}]",
+				"multiplier": 1
+			},
+			{
+				"key": "net.if.in[ifInOctets.{port}]",
+				"multiplier": 1
+			},
+			{
+				"key": "net.if.in[{port}]",
+				"multiplier": 1
+			},
+			{
+				"key": "proxmox_ve.node.qemu.network.output[*,{port}]",
+				"multiplier": 1
+			}
+		],
+		"out": [
+			{
+				"key": "net.if.out[ifHCOutOctets.{port}]",
+				"multiplier": 1
+			},
+			{
+				"key": "net.if.out[ifOutOctets.{port}]",
+				"multiplier": 1
+			},
+			{
+				"key": "net.if.out[{port}]",
+				"multiplier": 1
+			},
+			{
+				"key": "proxmox_ve.node.qemu.network.input[*,{port}]",
+				"multiplier": 1
+			}
+		],
+		"speed": [
+			{
+				"key": "net.if.speed[ifHighSpeed.{port}]",
+				"multiplier": 1
+			},
+			{
+				"key": "net.if.speed[ifSpeed.{port}]",
+				"multiplier": 1
+			}
+		]
+	},
+	"types": [
+		{
+			"type": "wifi",
+			"name_regex": "\\bU[0-9]|access.?point|\\bAP\\b|wi-?fi|wlan|mesh"
+		},
+		{
+			"type": "router",
+			"name_regex": "routeur|\\brouter\\b|gateway|firewall|passerelle|ucg|pfsense|opnsense|fortigate"
+		},
+		{
+			"type": "hypervisor",
+			"group_regex": "hypervisor|proxmox|vmware|esxi?|virtuali|kvm|xen|hyper-v",
+			"name_regex": "proxmox|esxi|vcenter|hyper-v"
+		},
+		{
+			"type": "storage",
+			"group_regex": "storage|stockage|\\bnas\\b|\\bsan\\b|backup",
+			"name_regex": "synology|truenas|qnap|\\bnas\\b"
+		},
+		{
+			"type": "switch",
+			"group_regex": "network|switch|r[ée]seau",
+			"name_regex": "switch|\\busw|\\bcrs|\\bsw[0-9]"
+		}
+	],
+	"scope": {
+		"host_groups": [],
+		"hide_unlinked": false
+	},
+	"problems": {
+		"min_severity": 0
+	},
+	"display": {
+		"links": "curved",
+		"traffic": true,
+		"animate": true
+	},
+	"services": {
+		"default_depth": 1,
+		"max_columns": 8
+	},
+	"refresh_seconds": 30,
+	"colors": {
+		"ok": "#2fb36b",
+		"severity": [
+			"#4aa3df",
+			"#4aa3df",
+			"#f2c230",
+			"#f08a24",
+			"#e5534b",
+			"#a4161a"
+		],
+		"down": "#a4161a",
+		"uplink": "#5b8def",
+		"flow_out": "#7fe9ff",
+		"flow_in": "#ffc46b",
+		"util_warn": "#f2c230",
+		"util_crit": "#e5534b"
+	},
+	"labels": {},
+	"utilization": {
+		"warn_percent": 50,
+		"crit_percent": 80,
+		"default_speed_bps": 1000000000
+	},
+	"panel": {
+		"metrics": [
+			{
+				"label": "Uptime",
+				"search": [
+					"system.uptime",
+					"sysUpTime"
+				]
+			},
+			{
+				"label": "CPU",
+				"search": [
+					"system.cpu.util",
+					"system.cpu.load"
+				]
+			},
+			{
+				"label": "Memory",
+				"search": [
+					"vm.memory.utilization",
+					"vm.memory.size[pavailable"
+				]
+			},
+			{
+				"label": "Latency",
+				"search": [
+					"icmppingsec"
+				]
+			},
+			{
+				"label": "Packet loss",
+				"search": [
+					"icmppingloss"
+				]
+			}
+		],
+		"graph_minutes": 60,
+		"graph_fallback": [
+			{
+				"label": "CPU",
+				"search": [
+					"system.cpu.util",
+					"system.cpu.load[all,avg1]"
+				]
+			},
+			{
+				"label": "Latency",
+				"search": [
+					"icmppingsec"
+				]
+			}
+		]
+	}
+}
