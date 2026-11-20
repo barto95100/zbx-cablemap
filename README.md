@@ -11,6 +11,15 @@ from simple **host tags**, with:
 
 Tested on Zabbix 8.0 (PHP 8.x). Should work on 7.x frontends using module manifest 2.0.
 
+## Screenshots
+
+![Topology map](docs/cablemap-overview.png)
+
+| | |
+|---|---|
+| ![Host panel with graphs](docs/cablemap-panel.png) | ![Zoom on a switch and its devices](docs/cablemap-zoom.png) |
+| ![Services overview](docs/services-overview.png) | ![Service dependency tree](docs/services-tree.png) |
+
 ## Install
 
 1. Copy this folder to `<zabbix-ui>/modules/cablemap` (e.g. `/usr/share/zabbix/ui/modules/cablemap`),

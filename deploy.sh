@@ -16,7 +16,7 @@ FPM="${ZBX_FPM-php8.4-fpm}"
 DEST="${UI_DIR%/}/modules/cablemap"
 
 COPYFILE_DISABLE=1 tar --no-xattrs \
-  --exclude './.git' --exclude './deploy.sh' --exclude './README.md' --exclude './.deploy.env' \
+  --exclude './.git' --exclude './deploy.sh' --exclude './README.md' --exclude './docs' --exclude './CHANGELOG.md' --exclude './LICENSE' --exclude './.deploy.env' \
   --exclude './.gitignore' --exclude './config.json' --exclude '.DS_Store' \
   -cf - . | ssh "${ZBX_HOST}" "
     set -e
