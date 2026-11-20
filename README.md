@@ -39,6 +39,42 @@ All paths below are on the **Zabbix web (frontend) server**, not on your worksta
 3. *Administration → General → Modules → Scan directory* → enable **Cablemap**.
 4. Open *Monitoring → Cablemap*.
 
+## Quick start (5 minutes)
+
+Nothing to configure in a file: the map is built from **tags on your hosts**. Example network:
+
+```
+gateway  ──(its port 2)──  core-switch  ──(its port 12)──  server1
+```
+
+1. In Zabbix open *Data collection → Hosts*, click the host, tab **Tags**, add a tag, then **Update**.
+2. Tag each host **with the name of the device it is plugged into** (its *parent*) and the **port of that parent**
+   it uses. The tag is always put on the *child*:
+
+   | Host (child)  | Tag `cablemap.uplink` | Meaning |
+   |---------------|-----------------------|---------|
+   | `core-switch` | `gateway:2`           | plugged into port 2 of `gateway` |
+   | `server1`     | `core-switch:12`      | plugged into port 12 of `core-switch` |
+   | `gateway`     | *(no uplink)*         | top of the tree (optionally add the tag `cablemap.root` = `1`) |
+
+   The parent name must match the Zabbix *host name* or *visible name* **exactly** (case-sensitive). The value is
+   `<parent name>:<port>`; a tag without `:`, or naming an unknown host, is silently ignored.
+3. Open *Monitoring → Cablemap*. Within one refresh (30 s) the tree appears.
+
+**The port number** is what identifies the interface in the **parent's** items. On the parent host open
+*Monitoring → Latest data* and search `ifHCInOctets`: the item key is `net.if.in[ifHCInOctets.12]`, so the port is
+`12` (it can also be an interface name, e.g. `ether5`). That is how traffic (↓ in / ↑ out) is read for the link.
+If the parent has no such item, the link is still drawn, just without rates.
+
+Link missing? Check the exact spelling of the parent name and the `:port` in the tag. By default every host is
+drawn, linked or not; to restrict the map set `scope.host_groups` (host groups) and/or `scope.hide_unlinked`
+in `config.json` (see *Configuration*).
+
+**Virtual machines**: tag the VM `cablemap.uplink` = `<hypervisor host>:<vm id>` (see *Traffic sources*).
+
+**Services view** (*Monitoring → Cablemap services*) needs **no tags at all**: it draws the Services you already
+created in *Services → Services*.
+
 ## Describe your topology with tags
 
 | Tag (default)      | Value                     | Meaning |
